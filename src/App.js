@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 const App = () => {
   const [staff, setstaff] = React.useState([]);
   const [student, setstudent] = React.useState([]);
-  //const [data, setdata] = React.useState("");
   const [name, setname] = React.useState("");
   const [id, setid] = React.useState("");
   const [staffid, setstaffid] = React.useState("");
@@ -10,23 +9,22 @@ const App = () => {
   const [staffname, setstaffname] = React.useState("");
   const [staffId, setstaffId] = React.useState("");
   const [staffemail, setstaffemail] = React.useState("");
-  const fetchdata = () => {
-    //function componentDidMount() {
-    fetch("http://localhost:4000/allStudents")
+  const getValue = () => {
+    
+    fetch("https://student-staff-backend.herokuapp.com/allStudents")
       .then((response) => response.json())
       .then((data) => setstudent(data));
     console.log("student", student);
-    //.then((data) => console.log("student", data));
-    fetch("http://localhost:4000/allStaff")
+    fetch("https://student-staff-backend.herokuapp.com/allStaff")
       .then((response) => response.json())
       .then((data) => setstaff(data));
-    //console.log("staff", staff);
+    
   };
   useEffect(() => {
-    fetchdata();
+    getValue();
   }, []);
   function add() {
-    fetch("http://localhost:4000/studentCreation", {
+    fetch("https://student-staff-backend.herokuapp.com/studentCreation", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -39,11 +37,11 @@ const App = () => {
         setstaffid("");
         setid("");
         setemail("");
-        fetchdata();
+        getValue();
       });
   }
   function addstaff() {
-    fetch("http://localhost:4000/staffCreation", {
+    fetch("https://student-staff-backend.herokuapp.com/staffCreation", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -55,23 +53,19 @@ const App = () => {
         setstaffname("");
         setstaffId("");
         setstaffemail("");
-        fetchdata();
+        getValue();
       });
   }
 
-  console.log("student", student);
-  /*console.log("data outside", data);
-  console.log("array", data);
-  console.log(data[0]);*/
+
   function update(index) {
-    // setdata(student.filter((d, i) => index == i)[0]);
     setname(student.filter((d, i) => index === i)[0].name);
     setstaffid(student.filter((d, i) => index === i)[0].staffid);
     setemail(student.filter((d, i) => index === i)[0].email);
     setid(student.filter((d, i) => index === i)[0].id);
   }
   function updatedata(index) {
-    fetch("http://localhost:4000/editStudent/{index}", {
+    fetch("https://student-staff-backend.herokuapp.com/editStudent/{index}", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -89,11 +83,8 @@ const App = () => {
       });
   }
   function deletedata(index) {
-    // setdata(student.filter((d, i) => index == i));
-    // console.log("data", data);
-    // console.log("array", data[0]);
     console.log("new", student.filter((d, i) => index === i)[0]);
-    fetch("http://localhost:4000/deleteStudent/{index}", {
+    fetch("https://student-staff-backend.herokuapp.com/deleteStudent/{index}", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -174,7 +165,6 @@ const App = () => {
           <tr>
             <th>Name</th>
             <th>Id</th>
-            <th>StudentCount</th>
             <th>E-mail</th>
           </tr>
         </thead>
@@ -184,7 +174,6 @@ const App = () => {
             <tr key={index}>
               <td>{a.name}</td>
               <td>{a.id}</td>
-              <td>{a.studentCount}</td>
               <td>{a.email}</td>
               <td>
               </td>
@@ -201,7 +190,6 @@ const App = () => {
             <th>Id</th>
             <th>Staff-Id</th>
             <th>E-mail</th>
-            <th>Actions</th>
           </tr>
         </thead>
 
