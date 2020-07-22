@@ -18,7 +18,6 @@ const App = () => {
     fetch("https://student-staff-backend.herokuapp.com/allStaff")
       .then((response) => response.json())
       .then((data) => setstaff(data));
-    
   };
   useEffect(() => {
     getValue();
@@ -74,12 +73,11 @@ const App = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        fetchdata();
         setname("");
         setstaffid("");
         setid("");
         setemail("");
-        fetchdata();
+        getValue();
       });
   }
   function deletedata(index) {
@@ -93,7 +91,7 @@ const App = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        fetchdata();
+        getValue();
       });
   }
   return (
@@ -172,9 +170,9 @@ const App = () => {
         <tbody>
           {staff.map((a, index) => (
             <tr key={index}>
-              <td>{a.name}</td>
-              <td>{a.id}</td>
-              <td>{a.email}</td>
+              <td>{a.staffname}</td>
+              <td>{a.staffId}</td>
+              <td>{a.staffemail}</td>
               <td>
               </td>
             </tr>
