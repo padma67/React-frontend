@@ -63,8 +63,8 @@ const App = () => {
     setemail(student.filter((d, i) => index === i)[0].email);
     setid(student.filter((d, i) => index === i)[0].id);
   }
-  function updatedata(index) {
-    fetch("https://student-staff-backend.herokuapp.com/editStudent/{index}", {
+  function updatedata() {
+    fetch("https://student-staff-backend.herokuapp.com/editStudent", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -82,7 +82,7 @@ const App = () => {
   }
   function deletedata(index) {
     console.log("new", student.filter((d, i) => index === i)[0]);
-    fetch("https://student-staff-backend.herokuapp.com/deleteStudent/{index}", {
+    fetch("https://student-staff-backend.herokuapp.com/deleteStudent", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -201,7 +201,7 @@ const App = () => {
               <td>
                 <button onClick={() => update(index)}>Edit</button>
                 <button onClick={() => deletedata(index)}>Delete</button>
-                <button onClick={() => updatedata(index)}>Update</button>
+                <button onClick={() => updatedata()}>Update</button>
               </td>
             </tr>
           ))}
